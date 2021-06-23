@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TestAdmin extends MainBase {
 
@@ -23,7 +24,6 @@ public class TestAdmin extends MainBase {
         for (int i = 0; i<appsMenu.size(); i++) {
             appsMenu = (drv.findElements(By.className("app")));
         appsMenu.get(i).click();
-
         List<WebElement> selectedApps = drv.findElements(By.className("doc"));
         for (int n = 0; n< selectedApps.size(); n++){
             selectedApps = drv.findElements(By.className("doc"));
