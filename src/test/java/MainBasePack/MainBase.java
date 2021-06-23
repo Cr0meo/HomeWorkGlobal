@@ -16,6 +16,7 @@ public class MainBase {
     public WebDriver drv;
     public WebDriverWait wait;
 
+
     String BASE_URL = "";
     String LOGON_NAME = "";
     String LOGON_PASS = "";
@@ -25,6 +26,7 @@ public class MainBase {
         ChromeOptions opts = new ChromeOptions();
         opts.addArguments("start-maximized");
         drv = new ChromeDriver(opts);
+        wait = new WebDriverWait(drv, 10);
 
     }
     public boolean isElementPresent(By element) {
@@ -34,7 +36,6 @@ public class MainBase {
         drv.get(BASE_URL);
     }
     public void logonAdmin() {
-        WebDriverWait wait = new WebDriverWait(drv, 10);
         drv.get(BASE_URL + "/admin");
         if (isElementPresent(By.cssSelector(".form-control[name=username]"))) {
             drv.findElement(By.cssSelector(".form-control[name=username]")).sendKeys(LOGON_NAME);

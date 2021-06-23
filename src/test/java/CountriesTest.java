@@ -18,7 +18,6 @@ public class CountriesTest extends MainBase {
 
     @Test
     public void countriesTest(){
-        WebDriverWait wait = new WebDriverWait(drv, 10);
         drv.get(ADMIN_EDIT_Countries);
         String originWindow = drv.getWindowHandle();
         Set<String> existWindows = drv.getWindowHandles();

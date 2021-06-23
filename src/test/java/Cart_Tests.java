@@ -19,7 +19,6 @@ public class Cart_Tests extends MainBase {
         openSite();
     }
     public void addPopularItemToCart (String itemName){
-        WebDriverWait wait = new WebDriverWait(drv, 10);
         String item = "#box-popular-products "+"[data-name='"+itemName+"']";
         WebElement productNew = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(item)));
         productNew.click();
@@ -28,7 +27,6 @@ public class Cart_Tests extends MainBase {
     }
     @Test
     public void addToCart() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(drv, 10);
         WebElement acceptCookies = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("accept_cookies")));
         acceptCookies.click();
         addPopularItemToCart("Green Duck");
@@ -43,8 +41,9 @@ public class Cart_Tests extends MainBase {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("cart"))).click();
         List<WebElement> cartList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.name("remove_cart_item")));
         for (int i = 0; i< cartList.size(); i++) {
-            Thread.sleep(1500);
+            WebElement cartSummary = drv.findElement(By.id("box-checkout-summary"));
            drv.findElement(By.name("remove_cart_item")).click();
+            wait.until(ExpectedConditions.stalenessOf(cartSummary));
            Assertions.assertTrue(drv.findElement(By.xpath("//*['There are no items in your cart.']")).isDisplayed(), "There are some items in cart");
         }
 
